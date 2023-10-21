@@ -4,7 +4,13 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import clienteAxios from '../config/axios';
 
+// Aqui generamos que la vinculacion de useContext con nuestro QuioscoContext
+
 const QuioscoContext = createContext();
+
+// En esta funcion de QuiscoProvider tenemos la mayoria de logica (funciones) en el front
+// aca podemos obtener la data para ser mostrada al usuario y la presentacion de la data
+// en variables hacia el HTML
 
 const QuioscoProvider = ({children}) => {
     const [categorias, setCategorias] = useState([]);
@@ -21,8 +27,11 @@ const QuioscoProvider = ({children}) => {
         setTotal(nuevoTotal)
     }, [pedido])
 
+    // Aqui esta la funcion de obtencion de las categorias
+
     const obtenerCategorias = async () => {
         try{
+            // aca generamos la conexion con nuestro back hacia las categorias
             const {data} = await clienteAxios('/api/categorias')
             setCategorias(data.data)
             setCategoriaActual(data.data[0])
